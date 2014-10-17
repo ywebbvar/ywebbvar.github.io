@@ -1,5 +1,5 @@
 ---
-title: "index"
+title: "MotionChart"
 author: "Andres Terreros and Yenny Webb-Vargas"
 date: "Friday, October 17, 2014"
 output: html_document
@@ -7,9 +7,12 @@ output: html_document
 
 This is a test to run the ggvis plot
 
-```{r echo=FALSE}
-#local({pkg <- select.list(sort(.packages(all.available = TRUE)),graphics=TRUE) + if(nchar(pkg)) library(pkg, character.only=TRUE)})
+```{r setOptions, message=FALSE, echo=FALSE}
 library(googleVis)
+op <- options(gvis.plot.tag='chart')
+```
+
+```{r echo=FALSE}
 enejul<-read.csv('http://ywebbvar.github.io/Terreros/enejul.csv',header=T)
 vis<-gvisMotionChart(enejul,idvar='DESCRIPCION',timevar='Año')
 mystate<-'
