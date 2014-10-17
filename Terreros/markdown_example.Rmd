@@ -1,0 +1,48 @@
+---
+title: "Checkign out googleVis"
+author: "Andres Terreros and Yenny Webb-Vargas"
+date: "Friday, October 17, 2014"
+output: html_document
+---
+This is a replication of the example in the vignette of `googleVis`. 
+
+```{r setOptions, message=FALSE}
+library(googleVis)
+op <- options(gvis.plot.tag='chart')
+```
+
+Combo chart
+
+```{r ComboExample, results='asis', tidy=FALSE}
+## Add the mean
+CityPopularity$Mean = mean(CityPopularity$Popularity)
+CC <- gvisComboChart(CityPopularity, xvar='City',yvar=c('Mean', 'Popularity'),
+options=list(seriesType='bars',
+width=450, height=300,
+title='City Popularity',
+series='{0: {type:\"line\"}}'))
+plot(CC)
+```
+
+gvisGeoChart with gvisTable and R code hidden
+
+```{r gvisMergeExample, results='asis', echo=FALSE}
+Geo <- gvisGeoChart(Exports, locationvar='Country', colorvar='Profit',
+options=list(height=300, width=350))
+Tbl <- gvisTable(Exports, options=list(height=300, width=200))
+plot(gvisMerge(Geo, Tbl, horizontal=TRUE))
+``````
+
+
+Motion Chart
+
+```{r MotionChartExample, results='asis', tidy=FALSE}
+M <- gvisMotionChart(Fruits, 'Fruit', 'Year',
+options=list(width=400, height=350))
+plot(M)
+```
+ 
+```{r resetOptions}
+## Set options back to original options
+options(op)
+```
